@@ -1,6 +1,8 @@
 const app = Vue.createApp({
     data() {
         return {
+
+            newMessage: '',
             contacts: [
                 {
                     name: 'Michele',
@@ -172,8 +174,29 @@ const app = Vue.createApp({
         selectContact(contact) {
             this.currentContact = contact;
             console.log(this.currentContact);
-        }
-    
+        },
+        sendMessage() {
+            if(this.newMessage.trim() === '') {
+                // Impedire l'invio di messaggi vuoti
+                return;
+            }
+            // Aggiungere il messaggio all'array dei messaggi del contatto attuale
+            this.currentContact.messages.push({
+                date: new Date().toLocaleString(),
+                message: this.newMessage,
+                status: 'sent'
+            });
+            // Reset del campo di input nuovo messaggio
+            this.newMessage = '';
+            // Risposta simulata dopo 1 secondo
+            setTimeout(() => {
+                this.currentContact.messages.push({
+                    date: new Date().toLocaleString(),
+                    message: 'Ok',
+                    status: 'received'
+                });
+            }, 1000);
+        },
+        
     }
-
 }).mount('#app');

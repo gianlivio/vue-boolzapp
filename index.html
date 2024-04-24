@@ -49,7 +49,7 @@
                      @click="selectContact(contact)" 
                 >
                     <div class="contact-logo">
-                        <img :src="`/img/${contact.avatar}.jpg`" :alt="contact.name">
+                        <img :src="`/img/avatar${contact.avatar}.jpg`" :alt="contact.name">
                     </div>
                     <div class="contact-info">
                         <h3>
@@ -93,7 +93,10 @@
                 <div class="right-footer-icon">
                     <i class="far fa-smile"></i>
                 </div>
-                <input class="new-message-inputs" placeholder="Scrivi un messaggio">
+                <input class="new-message-inputs" 
+                placeholder="Scrivi un messaggio" 
+                v-model="newMessage"
+                @keyup.enter="sendMessage">
                 <div class="right-footer-icon">
                     <i class="fa fa-microphone" aria-hidden="true"></i>
                 </div>
